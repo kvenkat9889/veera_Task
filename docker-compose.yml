@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: veera_postgres4
+    environment:
+      POSTGRES_DB: hr_task_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5453:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - veera_net
+
+  backend:
+    build:
+      context: ./Backend
+    container_name: veera_backend4
+    ports:
+      - "3028:3028"
+    depends_on:
+      - postgres
+    networks:
+      - veera_net
+
+  frontend:
+    build:
+      context: ./Frontend
+    container_name: veera_frontend4
+    ports:
+      - "9043:80"
+    networks:
+      - veera_net
+
+  hr:
+    build:
+      context: ./HR
+    container_name: veera_hr4
+    ports:
+      - "9044:80"
+    networks:
+      - veera_net
+
+volumes:
+  pgdata:
+
+networks:
+  veera_net:
+

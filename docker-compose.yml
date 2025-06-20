@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123
     ports:
-      - "5453:5432"
+      - "5203:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -20,7 +20,7 @@ services:
       context: ./Backend
     container_name: veera_backend4
     ports:
-      - "3028:3028"
+      - "3103:3103"
     depends_on:
       - postgres
     networks:
@@ -31,7 +31,7 @@ services:
       context: ./Frontend
     container_name: veera_frontend4
     ports:
-      - "9043:80"
+      - "8206:80"
     networks:
       - veera_net
 
@@ -40,7 +40,7 @@ services:
       context: ./HR
     container_name: veera_hr4
     ports:
-      - "9044:80"
+      - "8207:80"
     networks:
       - veera_net
 
